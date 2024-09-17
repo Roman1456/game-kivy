@@ -52,10 +52,10 @@ class Football(Screen):
         layout = FloatLayout()
         self.add_widget(layout)
 
-        self.background = Image(socure = '.png', size_hint=(1,1))
+        self.background = Image(socure = 'football.png', size_hint=(1,1))
         layout.add_widget(self.background)
 
-        self.ball = Image(sourse = ".png",)
+        self.ball = Image(sourse = "football ball.png",)
 
 
 class ClikerApp(App):
