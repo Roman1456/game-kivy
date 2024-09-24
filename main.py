@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.properties import NumericProperty
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen ,FadeTransition
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -55,7 +55,7 @@ class  GameSelectionScreen(Screen):
 class Football(Screen):
     score = NumericProperty(0)
     def __init__(self, **kwargs):
-        super(Football).__init__(**kwargs)
+        super(Football, self).__init__(**kwargs)
         layout = FloatLayout()
         self.add_widget(layout)
 
@@ -70,7 +70,7 @@ class Football(Screen):
         self.score_label = Label(text='Score: 0',font_size='24sp', size_hint=(1, 0.1))
         layout.add_widget(self.score_label)
 
-        self.back_button = Button(tet='Назад',size_hint=(1, 0.2))
+        self.back_button = Button(text='Назад',size_hint=(1, 0.2))
         self.back_button.bind(on_press=self.go_back)
         layout.add_widget(self.back_button)
 
@@ -81,7 +81,7 @@ class Football(Screen):
             self.ball_cliick_animation()
 
     def ball_cliick_animation(self):
-        anim=Animation(size=(150,150)) + Animation(size=(100,100))
+        anim=Animation(size=(150,150), opacity=0.5, duration = 0.2) + Animation(size=(100,100))
         anim.start(self.ball)
 
 
@@ -90,9 +90,10 @@ class Football(Screen):
 
 
 
+
 class ClikerApp(App):
     def build(self):
-        sm = ScreenManager()
+        sm = ScreenManager(transition=FadeTransition)
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(GameSelectionScreen(name='game_selection'))
         sm.add_widget(Football(name='football'))
